@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>resume</artifactId>
+    <version>1.0</version>
+    <packaging>war</packaging>
+
+    <name>resume Maven Webapp</name>
+    <!-- FIXME change it to the project's website -->
+    <url>http://www.example.com</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+<!--        Servlet API and JSTL for Integration with TomCat 9-->
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+            <version>1.2.6</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- Logging -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.11</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!--        <directory>${project.basedir}/target</directory>-->
+        <!--        &lt;!&ndash;        <outputDirectory>${project.build.directory}/</outputDirectory>&ndash;&gt;-->
+        <finalName>resume</finalName>
+        <outputDirectory>${project.basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>clean-lib</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target name="clean-lib">
+                                <delete dir="${project.basedir}/src/main/webapp/WEB-INF/lib"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-lib</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target name="copy-lib">
+                                <!-- <mkdir dir="${project.basedir}/src/main/webapp/WEB-INF/lib" />-->
+                                <delete dir="${project.basedir}/src/main/webapp/WEB-INF/lib"/>
+                                <copy todir="${project.basedir}/src/main/webapp/WEB-INF/lib">
+                                    <fileset dir="${project.basedir}/target/${project.build.finalName}/WEB-INF/lib"/>
+                                </copy>
+                            </target>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>tom-run</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target name="tom-run">
+                                <exec executable="cmd" dir="C:\Tomcat\apache-tomcat-9.0.71\bin">
+                                    <arg line ="/c catalina.bat jpda start &amp;" />
+                                </exec>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                    <showDeprecation>true</showDeprecation>
+                    <showWarnings>true</showWarnings>
+                    <debug>true</debug>
+                    <!--<outputDirectory>${project.build.directory}D:\Projects\fullProjects\resume\src\main\webapp\WEB-INF\classes</outputDirectory>-->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <failOnMissingWebXml>true</failOnMissingWebXml>
+                    <warSourceDirectory>src/main/webapp</warSourceDirectory>
+                    <!--<outputDirectory>D:\Projects\fullProjects\resume\src\main\webapp\WEB-INF</outputDirectory>-->
+                    <!-- <outputDirectory>c:\Tomcat\apache-tomcat-9.0.65\webapps\</outputDirectory>-->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+
