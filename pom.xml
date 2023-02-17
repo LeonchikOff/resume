@@ -21,13 +21,40 @@
     </properties>
 
     <dependencies>
-<!--        Servlet API and JSTL for Integration with TomCat 9-->
+        <!--        Servlet API and JSTL for Integration with TomCat 9-->
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>jakarta.servlet.jsp.jstl</artifactId>
             <version>1.2.6</version>
             <scope>compile</scope>
         </dependency>
+        <!-- PostgreSQL JDBC Driver -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.5.3</version>
+        </dependency>
+
+        <!--Library for creating thumbnails of images -->
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>0.4.19</version>
+        </dependency>
+        <!--Extension of the java.lang standard library-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+        <!-- Joda-Time provides a quality replacement for the Java date and time classes.
+             However, it is preferable to use java.time standard library -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.12.2</version>
+        </dependency>
+
         <!-- Logging -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -35,11 +62,14 @@
             <version>1.2.11</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.26</version>
+        </dependency>
     </dependencies>
 
     <build>
-        <!--        <directory>${project.basedir}/target</directory>-->
-        <!--        &lt;!&ndash;        <outputDirectory>${project.build.directory}/</outputDirectory>&ndash;&gt;-->
         <finalName>resume</finalName>
         <outputDirectory>${project.basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
         <plugins>
@@ -68,7 +98,6 @@
                         </goals>
                         <configuration>
                             <target name="copy-lib">
-                                <!-- <mkdir dir="${project.basedir}/src/main/webapp/WEB-INF/lib" />-->
                                 <delete dir="${project.basedir}/src/main/webapp/WEB-INF/lib"/>
                                 <copy todir="${project.basedir}/src/main/webapp/WEB-INF/lib">
                                     <fileset dir="${project.basedir}/target/${project.build.finalName}/WEB-INF/lib"/>
@@ -76,7 +105,6 @@
                             </target>
                         </configuration>
                     </execution>
-
                     <execution>
                         <id>tom-run</id>
                         <phase>install</phase>
@@ -86,7 +114,7 @@
                         <configuration>
                             <target name="tom-run">
                                 <exec executable="cmd" dir="C:\Tomcat\apache-tomcat-9.0.71\bin">
-                                    <arg line ="/c catalina.bat jpda start &amp;" />
+                                    <arg line="/c catalina.bat jpda start &amp;"/>
                                 </exec>
                             </target>
                         </configuration>
@@ -103,7 +131,6 @@
                     <showDeprecation>true</showDeprecation>
                     <showWarnings>true</showWarnings>
                     <debug>true</debug>
-                    <!--<outputDirectory>${project.build.directory}D:\Projects\fullProjects\resume\src\main\webapp\WEB-INF\classes</outputDirectory>-->
                 </configuration>
             </plugin>
             <plugin>
@@ -113,8 +140,6 @@
                 <configuration>
                     <failOnMissingWebXml>true</failOnMissingWebXml>
                     <warSourceDirectory>src/main/webapp</warSourceDirectory>
-                    <!--<outputDirectory>D:\Projects\fullProjects\resume\src\main\webapp\WEB-INF</outputDirectory>-->
-                    <!-- <outputDirectory>c:\Tomcat\apache-tomcat-9.0.65\webapps\</outputDirectory>-->
                 </configuration>
             </plugin>
         </plugins>
