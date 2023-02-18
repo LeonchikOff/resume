@@ -28,6 +28,15 @@
             <version>1.2.6</version>
             <scope>compile</scope>
         </dependency>
+        <!-- Template engine -->
+        <dependency>
+            <groupId>org.sitemesh</groupId>
+            <artifactId>sitemesh</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
+
+
         <!-- PostgreSQL JDBC Driver -->
         <dependency>
             <groupId>org.postgresql</groupId>
