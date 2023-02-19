@@ -3,3 +3,4 @@
 <link rel="stylesheet" href="../../../static/css/bootstrap-theme.css">
 <link rel="stylesheet" href="../../../static/css/font-awesome.css">
 <link rel="stylesheet" href="../../../static/css/app.css">
+<link rel="stylesheet" href="../../../static/css/timeline.css">

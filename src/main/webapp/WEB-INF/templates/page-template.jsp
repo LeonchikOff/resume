@@ -7,13 +7,13 @@
     <jsp:include page="../jsp/sections/meta.jsp"/>
     <jsp:include page="../jsp/sections/css.jsp"/>
 </head>
-<body>
-<jsp:include page="../jsp/sections/header.jsp"/>
-<jsp:include page="../jsp/sections/navigation.jsp"/>
-<section class="main">
-    <sitemesh:write property="body"/>
-</section>
-<jsp:include page="../jsp/sections/footer.jsp"/>
-<jsp:include page="../jsp/sections/js.jsp"/>
+<body class="resume">
+    <jsp:include page="../jsp/sections/header.jsp"/>
+    <jsp:include page="../jsp/sections/navigation.jsp"/>
+    <section class="main">
+        <sitemesh:write property="body"/>
+    </section>
+    <jsp:include page="../jsp/sections/footer.jsp"/>
+    <jsp:include page="../jsp/sections/js.jsp"/>
 </body>
 </html>
