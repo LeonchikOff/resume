@@ -1,11 +1,12 @@
 package org.example.resume.spring;
 
-import org.example.resume.filters.ApplicationFilter;
+import org.example.resume.filters.ResumeApplicationFilter;
 import org.example.resume.listeners.ApplicationListener;
 
 import org.sitemesh.builder.SiteMeshFilterBuilder;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -46,7 +47,7 @@ public class ResumeWebApplicationInitializer implements WebApplicationInitialize
         servletContainer.addListener(applicationListener);
 
         //registrations filters
-        ApplicationFilter applicationFilter = springCdiWebApplicationContainer.getBean(ApplicationFilter.class);
+        ResumeApplicationFilter resumeApplicationFilter = springCdiWebApplicationContainer.getBean(ResumeApplicationFilter.class);
         CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter("UTF-8", true);
         ConfigurableSiteMeshFilter siteMeshFilter = new ConfigurableSiteMeshFilter() {
             @Override
@@ -56,7 +57,7 @@ public class ResumeWebApplicationInitializer implements WebApplicationInitialize
         };
 
         servletContainer
-                .addFilter(applicationFilter.getClass().getSimpleName(), applicationFilter)
+                .addFilter(resumeApplicationFilter.getClass().getSimpleName(), resumeApplicationFilter)
                 .addMappingForUrlPatterns(null, true, "/*");
         servletContainer
                 .addFilter(encodingFilter.getClass().getSimpleName(), encodingFilter)

@@ -9,7 +9,6 @@ import org.springframework.core.io.ClassPathResource;
 @Configuration
 @ComponentScan(basePackages = {
         "org.example.resume.services.impl",
-        "org.example.resume.controllers",
         "org.example.resume.filters",
         "org.example.resume.listeners"})
 public class ServiceConfig {

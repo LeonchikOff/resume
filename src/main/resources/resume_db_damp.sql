@@ -27,7 +27,7 @@ create table profile
     birth_day     date,
     phone         varchar(20) unique,
     email         varchar(100) unique,
-    county        varchar(60),
+    country        varchar(60),
     city          varchar(100),
     objective     text,
     summary       text,

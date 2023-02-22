@@ -3,10 +3,10 @@
 <div class="panel panel-primary">
     <div class="panel-body">
         <a href="/edit">
-        <img src="<c:url value="/media/avatar/1f888305-b95d-40ed-87f8-7d04488289a9.jpg"/>"
-             class="img-responsive photo" alt="photo"/>
+        <img src="<c:url value="${profile.largePhoto}"/>"
+             class="img-responsive photo" alt="${profile.uid} "/>
         </a>
-        <h1 class="text-center"><a href="/edit" style="color: #0f0f0f;"/>${fullName}</h1>
+        <h1 class="text-center"><a  style="color: black" href="/edit"/>${profile.firstName}</h1>
         <h6 class="text-center"><strong>Odessa, Ukraine</strong></h6>
         <h6 class="text-center"><strong>Age: </strong>27, <strong>Birthday: </strong>Feb 26,1989</h6>
         <div class="list-group contacts">
