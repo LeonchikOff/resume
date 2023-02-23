@@ -5,7 +5,6 @@ import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.Objects;
 
 @Setter
 @Getter
@@ -15,7 +14,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "practice")
-public class Practice extends AbstractFinishDateEntity<Long> implements InterfaceProfileEntity {
+public class Practice extends AbstractFinishDateEntity<Long> implements ProfileEntityInterface {
     @Id
     @SequenceGenerator(name = "practice_id_generator", sequenceName = "practice_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "practice_id_generator")

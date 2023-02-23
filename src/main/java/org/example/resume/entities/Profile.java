@@ -10,8 +10,8 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -75,6 +75,7 @@ public class Profile extends AbstractEntity<Long> {
     @Embedded
     private Contacts contacts;
 
+
     @OneToMany(mappedBy = "profile", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Certificate> certificates;
 
@@ -102,4 +103,41 @@ public class Profile extends AbstractEntity<Long> {
     private List<Course> courses;
 
 
+    private void updateListSetProfile(List<? extends ProfileEntityInterface> list) {
+        if (list != null)
+            list.forEach(profileEntityInterface -> profileEntityInterface.setProfile(this));
+    }
+
+    public void setCertificates(List<Certificate> certificates) {
+        updateListSetProfile(this.certificates = certificates);
+    }
+
+    public void setEducations(List<Education> educations) {
+        updateListSetProfile(this.educations = educations);
+    }
+
+    public void setHobbies(List<Hobby> hobbies) {
+        updateListSetProfile(this.hobbies = hobbies);
+    }
+
+    public void setLanguages(List<Language> languages) {
+        updateListSetProfile(this.languages = languages);
+    }
+
+    public void setPractices(List<Practice> practices) {
+        updateListSetProfile(this.practices = practices);
+    }
+
+    public void setSkills(List<Skill> skills) {
+        updateListSetProfile(this.skills = skills);
+    }
+
+    public void setCourses(List<Course> courses) {
+        updateListSetProfile(this.courses = courses);
+    }
+
+    @Transient
+    public String getFullName() {
+        return getFirstName() + " " + getLastName();
+    }
 }

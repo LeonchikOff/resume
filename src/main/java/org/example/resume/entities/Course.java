@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.util.Objects;
 
 @Getter
 @Setter
@@ -16,7 +14,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "course")
-public class Course extends AbstractFinishDateEntity<Long> implements InterfaceProfileEntity {
+public class Course extends AbstractFinishDateEntity<Long> implements ProfileEntityInterface {
     @Id
     @SequenceGenerator(name = "course_id_generator", sequenceName = "course_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "course_id_generator")

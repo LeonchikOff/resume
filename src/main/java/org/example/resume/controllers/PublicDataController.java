@@ -1,7 +1,7 @@
 package org.example.resume.controllers;
 
 import org.example.resume.entities.Profile;
-import org.example.resume.repositories.ProfileRepository;
+import org.example.resume.services.FindProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class PublicDataController {
 
     @Autowired
-    private ProfileRepository profileRepository;
+    private FindProfileService findProfileService;
 
     @RequestMapping(value = "/{uid}", method = RequestMethod.GET)
     public String getProfile(@PathVariable("uid") String uid, Model model) {
-        Profile profile = profileRepository.findByUid(uid);
+        Profile profile = findProfileService.findByUid(uid);
         model.addAttribute("profile", profile);
         return "profile";
     }

@@ -55,6 +55,13 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>5.6.14.Final</version>
         </dependency>
+        <!--annotation: jakarta.validation-api-2.0.2
+            provider:   Hibernate-validator-->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.1.2.Final</version>
+        </dependency>
         <!-- DBCP software implements Database Connection Pooling -->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -84,6 +91,17 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
             <version>1.10.0</version>
+        </dependency>
+        <!--The Apache Commons Collections package contains types that extend and augment the Java Collections Framework.-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.4</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.4</version>
         </dependency>
         <!-- Joda-Time provides a quality replacement for the Java date and time classes.
              However, it is preferable to use java.time standard library -->

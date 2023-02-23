@@ -25,7 +25,7 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "hobby")
-public class Hobby extends AbstractEntity<Long> implements InterfaceProfileEntity, Comparable<Hobby> {
+public class Hobby extends AbstractEntity<Long> implements ProfileEntityInterface, Comparable<Hobby> {
     @Id
     @SequenceGenerator(name = "hobby_id_generator", sequenceName = "hobby_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hobby_id_generator")

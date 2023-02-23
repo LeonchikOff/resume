@@ -18,8 +18,8 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = {"org.example.resume.repositories"})
 @PropertySource("classpath:application.properties")
+@EnableJpaRepositories(basePackages = {"org.example.resume.repositories"})
 public class JavaPersistenceConfig {
 
     @Autowired

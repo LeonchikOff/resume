@@ -14,7 +14,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "language")
-public class Language extends AbstractEntity<Long> implements InterfaceProfileEntity {
+public class Language extends AbstractEntity<Long> implements ProfileEntityInterface {
     @Id
     @SequenceGenerator(name = "language_id_generator", sequenceName = "language_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "language_id_generator")

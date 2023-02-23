@@ -1,5 +1,5 @@
 package org.example.resume.entities;
 
-public interface InterfaceProfileEntity {
+public interface ProfileEntityInterface {
     void setProfile(Profile profile);
 }

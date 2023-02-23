@@ -1,10 +1,8 @@
 package org.example.resume.entities;
 
 import lombok.*;
-import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Setter
 @Getter
@@ -14,7 +12,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "certificate")
-public class Certificate extends AbstractEntity<Long> implements InterfaceProfileEntity{
+public class Certificate extends AbstractEntity<Long> implements ProfileEntityInterface {
     @Id
     @SequenceGenerator(name = "certificate_id_generator", sequenceName = "certificate_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "certificate_id_generator")

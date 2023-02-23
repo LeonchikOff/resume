@@ -7,6 +7,7 @@ import org.sitemesh.builder.SiteMeshFilterBuilder;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -49,6 +50,7 @@ public class ResumeWebApplicationInitializer implements WebApplicationInitialize
         //registrations filters
         ResumeApplicationFilter resumeApplicationFilter = springCdiWebApplicationContainer.getBean(ResumeApplicationFilter.class);
         CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter("UTF-8", true);
+        OpenEntityManagerInViewFilter openEntityManagerInViewFilter = new OpenEntityManagerInViewFilter();
         ConfigurableSiteMeshFilter siteMeshFilter = new ConfigurableSiteMeshFilter() {
             @Override
             protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
@@ -61,6 +63,9 @@ public class ResumeWebApplicationInitializer implements WebApplicationInitialize
                 .addMappingForUrlPatterns(null, true, "/*");
         servletContainer
                 .addFilter(encodingFilter.getClass().getSimpleName(), encodingFilter)
+                .addMappingForUrlPatterns(null, true, "/*");
+        servletContainer
+                .addFilter(openEntityManagerInViewFilter.getClass().getSimpleName(), openEntityManagerInViewFilter)
                 .addMappingForUrlPatterns(null, true, "/*");
         servletContainer
                 .addFilter("siteMeshFilter", siteMeshFilter)
