@@ -40,9 +40,11 @@ public class ResumeApplicationFilter implements Filter {
             if (!production) {
                 throw new ServletException(throwable);
             } else {
-                if (requestURI.equals("/error"))
-                    throw new ServletException(throwable);
-                else
+                if (requestURI.equals("/error") || requestURI.startsWith("/fragment")) {
+                    resp.reset();
+                    resp.getWriter().write("");
+                    resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                } else
                     resp.sendRedirect("/error?url=" + requestURI);
             }
         }

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.joda.time.LocalDate;
+import org.joda.time.Years;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -138,6 +140,13 @@ public class Profile extends AbstractEntity<Long> {
 
     @Transient
     public String getFullName() {
-        return getFirstName() + " " + getLastName();
+        return firstName + " " + lastName;
+    }
+
+    @Transient
+    public int getAge(){
+        LocalDate now = new LocalDate();
+        LocalDate birthDate = new LocalDate(birthDay);
+        return Years.yearsBetween(birthDate, now).getYears();
     }
 }

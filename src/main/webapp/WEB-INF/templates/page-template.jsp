@@ -10,7 +10,7 @@
 <body class="resume">
     <jsp:include page="../jsp/sections/header.jsp"/>
     <jsp:include page="../jsp/sections/navigation.jsp"/>
-    <section class="main">
+    <section class="main container">
         <sitemesh:write property="body"/>
     </section>
     <jsp:include page="../jsp/sections/footer.jsp"/>

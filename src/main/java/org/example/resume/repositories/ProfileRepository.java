@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
-public interface ProfileRepository extends PagingAndSortingRepository<Profile, Long> {
+public interface ProfileRepository  extends PagingAndSortingRepository<Profile, Long> {
 
     Profile findByUid(String uid);
 
