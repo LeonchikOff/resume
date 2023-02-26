@@ -2,23 +2,22 @@ package org.example.resume.spring;
 
 import org.example.resume.filters.ResumeApplicationFilter;
 import org.example.resume.listeners.ApplicationListener;
-
 import org.sitemesh.builder.SiteMeshFilterBuilder;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
-
-import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
+import org.springframework.web.filter.RequestContextFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 import javax.servlet.SessionTrackingMode;
-
 import java.util.EnumSet;
 
 public class ResumeWebApplicationInitializer implements WebApplicationInitializer {
@@ -46,19 +45,22 @@ public class ResumeWebApplicationInitializer implements WebApplicationInitialize
         servletContainer.addListener(contextLoaderListener);
         ApplicationListener applicationListener = springCdiWebApplicationContainer.getBean(ApplicationListener.class);
         servletContainer.addListener(applicationListener);
+        HttpSessionEventPublisher httpSessionEventPublisher = new HttpSessionEventPublisher();
+        servletContainer.addListener(httpSessionEventPublisher);
 
         //registrations filters
         ResumeApplicationFilter resumeApplicationFilter = springCdiWebApplicationContainer.getBean(ResumeApplicationFilter.class);
         CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter("UTF-8", true);
         OpenEntityManagerInViewFilter openEntityManagerInViewFilter = new OpenEntityManagerInViewFilter();
+        RequestContextFilter requestContextFilter = new RequestContextFilter();
+        DelegatingFilterProxy springSecurityFilterChain = new DelegatingFilterProxy("springSecurityFilterChain");
         ConfigurableSiteMeshFilter siteMeshFilter = new ConfigurableSiteMeshFilter() {
             @Override
             protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
-                builder.addDecoratorPath("/*",          "/WEB-INF/templates/page-template.jsp");
+                builder.addDecoratorPath("/*", "/WEB-INF/templates/page-template.jsp");
                 builder.addDecoratorPath("/fragment/*", "/WEB-INF/templates/fragment-template.jsp");
             }
         };
-
         servletContainer
                 .addFilter(resumeApplicationFilter.getClass().getSimpleName(), resumeApplicationFilter)
                 .addMappingForUrlPatterns(null, true, "/*");
@@ -67,6 +69,12 @@ public class ResumeWebApplicationInitializer implements WebApplicationInitialize
                 .addMappingForUrlPatterns(null, true, "/*");
         servletContainer
                 .addFilter(openEntityManagerInViewFilter.getClass().getSimpleName(), openEntityManagerInViewFilter)
+                .addMappingForUrlPatterns(null, true, "/*");
+        servletContainer
+                .addFilter(requestContextFilter.getClass().getSimpleName(), requestContextFilter)
+                .addMappingForUrlPatterns(null, true, "/*");
+        servletContainer
+                .addFilter("springSecurityFilterChain", springSecurityFilterChain)
                 .addMappingForUrlPatterns(null, true, "/*");
         servletContainer
                 .addFilter("siteMeshFilter", siteMeshFilter)

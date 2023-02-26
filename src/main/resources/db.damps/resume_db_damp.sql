@@ -8,6 +8,7 @@ drop table if exists education;
 drop table if exists course;
 drop table if exists certificate;
 drop table if exists profile;
+drop table if exists persistent_logins;
 
 drop sequence if exists certificate_seq;
 drop sequence if exists course_seq;
@@ -200,6 +201,13 @@ create table profile_restore
     token varchar(255) unique not null,
     foreign key (id) references profile (id)
         on delete cascade on update cascade
+);
+create table persistent_logins
+(
+    username varchar(64) not null,
+    series varchar(64) not null,
+    token varchar(64) not null,
+    last_used timestamp not null
 );
 ------------------------------------------------------------------------------------
 create index certificate_idx on certificate using btree (id_profile);

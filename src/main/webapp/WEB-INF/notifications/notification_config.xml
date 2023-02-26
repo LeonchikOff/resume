@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<beans>
+    <bean id="restoreAccessNotification" class="org.example.resume.models.NotificationMessage">
+        <property name="subject" value="Restore access"/>
+        <property name="content">
+            <value>To restore access please click on ${restoreLink}.</value>
+        </property>
+    </bean>
+    <bean id="passwordChangedNotification" class="org.example.resume.models.NotificationMessage">
+        <property name="subject" value="Password changed"/>
+        <property name="content">
+            <value>This email is to notify you that the password for your account ${profile.uid} has been changed.
+            </value>
+        </property>
+    </bean>
+</beans>

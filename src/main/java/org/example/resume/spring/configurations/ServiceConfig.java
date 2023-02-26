@@ -11,7 +11,8 @@ import org.springframework.core.io.ClassPathResource;
 @ComponentScan(basePackages = {
         "org.example.resume.services",
         "org.example.resume.filters",
-        "org.example.resume.listeners"})
+        "org.example.resume.listeners",
+        "org.example.resume.components"})
 @PropertySource("classpath:logic.properties")
 public class ServiceConfig {
 
